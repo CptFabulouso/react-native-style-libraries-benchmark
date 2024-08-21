@@ -1,19 +1,21 @@
 import { View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { TestComponentProps } from "../Tester/TestComponent";
 import { createTestScreen } from "../Tester";
 import "@/themes/unistyles-theme";
 import { BOX_SIZE } from "@/utils";
-import { ThemeProvider } from "@/themes/themed-components-theme";
+import {
+  ThemeProvider,
+  createUseStyle,
+} from "@/themes/themed-components-theme";
 
 const InlineStyleRenderer = (props: TestComponentProps) => {
-  const { styles } = useStyles(stylesheet);
+  const styles = useStyles();
 
   return <View style={{ ...styles.redBox, backgroundColor: props.color }} />;
 };
 
 const PredefinedStyleRenderer = (props: TestComponentProps) => {
-  const { styles } = useStyles(stylesheet);
+  const styles = useStyles();
 
   return (
     <View style={props.color === "red" ? styles.redBox : styles.blueBox} />
@@ -21,7 +23,7 @@ const PredefinedStyleRenderer = (props: TestComponentProps) => {
 };
 
 const OriginalTestRenderer = () => {
-  const { styles } = useStyles(stylesheet);
+  const styles = useStyles();
 
   return <View style={styles.original} />;
 };
@@ -41,7 +43,7 @@ const ThemedComponents = () => {
   );
 };
 
-const stylesheet = createStyleSheet((theme) => ({
+const useStyles = createUseStyle((theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
