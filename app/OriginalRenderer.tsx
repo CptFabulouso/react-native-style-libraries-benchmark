@@ -15,7 +15,7 @@ import Twrnc from "@/components/OriginalStyleLibs/Twrnc";
 import { Zephyr } from "@/components/OriginalStyleLibs/Zephyr";
 import FastStyles from "@/components/OriginalStyleLibs/FastStyles";
 import UnistylesV1 from "@/components/OriginalStyleLibs/UnistylesV1";
-import Unistyles from "@/components/OriginalStyleLibs/Unistyles";
+import UnistylesV2 from "@/components/OriginalStyleLibs/UnistylesV2";
 
 export default function App() {
   const [styleType, setStyleType] = useState<any>(undefined);
@@ -49,7 +49,7 @@ export default function App() {
       case "FastStyles":
         return <FastStyles />;
       case "UnistylesV2":
-        return <Unistyles />;
+        return <UnistylesV2 />;
       case "UnistylesV1":
         return <UnistylesV1 />;
       default:

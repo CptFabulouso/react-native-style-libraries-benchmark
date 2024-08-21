@@ -3,7 +3,6 @@ import { Button, View as RNView } from "react-native";
 
 import { staticStyles } from "./RenderTests.styles";
 import { useTest } from "@/hooks";
-import { COUNT } from "@/utils";
 
 export type TestComponentProps = {
   index: number;
@@ -26,9 +25,13 @@ const TestComponent = ({
   onRunTest,
   onFinishTest,
   runningTestName,
+  numberOfElements,
   Component,
 }: TestProps) => {
-  const arr = useMemo(() => new Array(COUNT).fill(0), []);
+  const arr = useMemo(
+    () => new Array(numberOfElements).fill(0),
+    [numberOfElements],
+  );
 
   const handleTestComplete = useCallback(
     ({ average }: { average: number }) => {

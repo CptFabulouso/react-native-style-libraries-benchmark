@@ -17,7 +17,7 @@ type StyleLib =
   // | "Gluestack"
   // | "Twrnc"
   // | "FastStyles"
-  | "Unistyles"
+  | "UnistylesV2"
   | "UnistylesV1";
 
 const styleLibs: StyleLib[] = [
@@ -25,7 +25,7 @@ const styleLibs: StyleLib[] = [
   "Themed Components",
   "Tamagui",
   "Restyle",
-  "Unistyles",
+  "UnistylesV2",
   "UnistylesV1",
 ];
 

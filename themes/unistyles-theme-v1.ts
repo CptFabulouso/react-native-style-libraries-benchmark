@@ -1,10 +1,12 @@
 const palette = {
   red: "red",
+  blue: "blue",
 };
 
 const theme = {
   colors: {
     red: palette.red,
+    blue: palette.blue,
   },
   spacing: {
     xs: 5,
