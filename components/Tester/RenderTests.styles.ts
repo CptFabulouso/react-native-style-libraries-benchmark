@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const staticStyles = StyleSheet.create({
+  originalContainer: {
+    display: "flex",
+    flexDirection: "row",
+  },
   testContainer: {
     flexWrap: "wrap",
     flexDirection: "row",

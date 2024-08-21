@@ -5,7 +5,7 @@
 import { ReactNode, useLayoutEffect, useState } from "react";
 import { StyleSheet, Text } from "react-native";
 
-function TimedRender(props: { children: ReactNode }) {
+function TimedRender(props: { children?: ReactNode }) {
   const [start] = useState(Date.now());
   const [end, setEnd] = useState(0);
 

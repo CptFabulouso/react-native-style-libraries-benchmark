@@ -12,9 +12,14 @@ const InlineStyleRenderer = (props: TestComponentProps) => {
   );
 };
 
+const OriginalTestRenderer = () => {
+  return <Stack borderColor="red" borderWidth={2} padding={5} />;
+};
+
 const TestScreen = createTestScreen({
   name: "Tamagui",
   renderInlineStyle: InlineStyleRenderer,
+  OriginalTest: OriginalTestRenderer,
 });
 
 const Tamagui = () => {

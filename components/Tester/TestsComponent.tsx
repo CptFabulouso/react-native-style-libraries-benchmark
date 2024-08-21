@@ -1,8 +1,10 @@
 import React, { useCallback, useRef, useState } from "react";
-import { View as RNView, Button, Text as RNText } from "react-native";
+import { View as RNView, Button, Text as RNText, View } from "react-native";
 
 import { staticStyles } from "./RenderTests.styles";
 import TestComponent, { TestComponentProps } from "./TestComponent";
+import TimedRender from "./TimedRender";
+import { ORIGINAL_COUNT } from "@/utils";
 
 export type TestsComponentProps = {
   name: string;
@@ -10,17 +12,29 @@ export type TestsComponentProps = {
     testName: string;
     componentRender: React.FC<TestComponentProps>;
   }[];
+  OriginalTest: React.FC;
 };
 
-const TestsComponent = ({ tests, name }: TestsComponentProps) => {
+const TestsComponent = ({ OriginalTest, tests, name }: TestsComponentProps) => {
   const [runningTest, setRunningTest] = useState<string>();
   const runningAllTests = useRef(false);
   const runningTestRef = useRef(runningTest);
+  const [runOriginal, setRunOriginal] = useState(false);
+
+  const handleRunTest = useCallback((test: string) => {
+    setRunOriginal(false);
+    setRunningTest(test);
+  }, []);
 
   const handleRunAllTests = useCallback(() => {
     runningAllTests.current = true;
     setRunningTest(tests[0].testName);
   }, [tests]);
+
+  const handleRunOriginalTest = useCallback(() => {
+    setRunOriginal(true);
+    setRunningTest(undefined);
+  }, []);
 
   runningTestRef.current = runningTest;
   const handleFinishTest = useCallback(() => {
@@ -48,13 +62,26 @@ const TestsComponent = ({ tests, name }: TestsComponentProps) => {
         <TestComponent
           key={test.testName}
           testGroupName={name}
-          onRunTest={setRunningTest}
+          onRunTest={handleRunTest}
           onFinishTest={handleFinishTest}
           runningTestName={runningTest}
           Component={test.componentRender}
           {...test}
         />
       ))}
+      <View style={staticStyles.testContainer}>
+        <Button title="Run original test" onPress={handleRunOriginalTest} />
+      </View>
+      {runOriginal ? (
+        <>
+          <TimedRender key={name} />
+          <View style={staticStyles.originalContainer}>
+            {new Array(ORIGINAL_COUNT).fill(0).map((_, i) => (
+              <OriginalTest key={i} />
+            ))}
+          </View>
+        </>
+      ) : null}
     </RNView>
   );
 };

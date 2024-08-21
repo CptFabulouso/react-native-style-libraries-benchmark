@@ -5,10 +5,12 @@ export const createTestScreen = ({
   name,
   renderInlineStyle,
   renderPredefinedStyle,
+  OriginalTest,
 }: {
   name: string;
   renderInlineStyle: React.FC<TestComponentProps>;
   renderPredefinedStyle?: React.FC<TestComponentProps>;
+  OriginalTest: React.FC;
 }) => {
   const Tests = [
     {
@@ -25,6 +27,8 @@ export const createTestScreen = ({
   }
 
   return function Renderer() {
-    return <TestsComponent tests={Tests} name={name} />;
+    return (
+      <TestsComponent tests={Tests} name={name} OriginalTest={OriginalTest} />
+    );
   };
 };

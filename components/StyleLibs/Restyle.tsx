@@ -32,10 +32,15 @@ const PredefinedStyleRenderer = (props: TestComponentProps) => {
   return <BoxVariant variant={props.color} />;
 };
 
+const OriginalTestRenderer = () => {
+  return <Box padding="xs" borderColor="red" borderWidth={2} />;
+};
+
 const TestScreen = createTestScreen({
   name: "Restyle",
   renderInlineStyle: InlineStyleRenderer,
   renderPredefinedStyle: PredefinedStyleRenderer,
+  OriginalTest: OriginalTestRenderer,
 });
 
 const Restyle = () => {

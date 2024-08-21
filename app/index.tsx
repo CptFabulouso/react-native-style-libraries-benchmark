@@ -16,7 +16,8 @@ type StyleLib =
   // | "Gluestack"
   // | "Twrnc"
   // | "FastStyles"
-  | "Unistyles";
+  | "Unistyles"
+  | "UnistylesV1";
 
 const styleLibs: StyleLib[] = [
   "React Native",
@@ -24,11 +25,10 @@ const styleLibs: StyleLib[] = [
   "Tamagui",
   "Restyle",
   "Unistyles",
+  "UnistylesV1",
 ];
 
 export default function App() {
-  const [styleType, setStyleType] = useState<StyleLib>();
-
   const onStyleTypePress = (curry: StyleLib) => () => {
     router.navigate(`/${curry}`);
   };

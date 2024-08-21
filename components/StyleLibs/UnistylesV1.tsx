@@ -1,9 +1,17 @@
 import { View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { UnistylesTheme, createUnistyles } from "react-native-unistyles-v1";
 import { TestComponentProps } from "../Tester/TestComponent";
 import { createTestScreen } from "../Tester";
-import "@/themes/unistyles-theme";
+import theme from "@/themes/unistyles-theme-v1";
 import { BOX_SIZE } from "@/utils";
+
+const breakpoints = {
+  xs: 0,
+  sm: 200,
+  md: 500,
+};
+
+const { createStyles, useStyles } = createUnistyles(breakpoints);
 
 const InlineStyleRenderer = (props: TestComponentProps) => {
   const { styles } = useStyles(stylesheet);
@@ -26,17 +34,21 @@ const OriginalTestRenderer = () => {
 };
 
 const TestScreen = createTestScreen({
-  name: "Unistyles",
+  name: "UnistylesV1",
   renderInlineStyle: InlineStyleRenderer,
   renderPredefinedStyle: PredefinedStyleRenderer,
   OriginalTest: OriginalTestRenderer,
 });
 
-const Unistyles = () => {
-  return <TestScreen />;
+const UnistylesV1 = () => {
+  return (
+    <UnistylesTheme theme={theme}>
+      <TestScreen />
+    </UnistylesTheme>
+  );
 };
 
-const stylesheet = createStyleSheet((theme) => ({
+const stylesheet = createStyles((theme: any) => ({
   container: {
     display: "flex",
     flexDirection: "row",
@@ -58,4 +70,4 @@ const stylesheet = createStyleSheet((theme) => ({
   },
 }));
 
-export default Unistyles;
+export default UnistylesV1;

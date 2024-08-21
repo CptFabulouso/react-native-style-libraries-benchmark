@@ -13,10 +13,15 @@ const PredefinedStyleRenderer = (props: TestComponentProps) => {
   );
 };
 
+const OriginalTestRenderer = () => {
+  return <View style={styles.original} />;
+};
+
 const TestScreen = createTestScreen({
   name: "React Native",
   renderInlineStyle: InlineStyleRenderer,
   renderPredefinedStyle: PredefinedStyleRenderer,
+  OriginalTest: OriginalTestRenderer,
 });
 
 const Native = () => {
@@ -33,6 +38,11 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     width: BOX_SIZE,
     height: BOX_SIZE,
+  },
+  original: {
+    borderColor: "red",
+    borderWidth: 2,
+    padding: 5,
   },
 });
 
