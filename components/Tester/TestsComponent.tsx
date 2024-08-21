@@ -5,13 +5,14 @@ import { staticStyles } from "./RenderTests.styles";
 import TestComponent, { TestComponentProps } from "./TestComponent";
 
 export type TestsComponentProps = {
+  name: string;
   tests: {
     testName: string;
     componentRender: React.FC<TestComponentProps>;
   }[];
 };
 
-const TestsComponent = ({ tests }: TestsComponentProps) => {
+const TestsComponent = ({ tests, name }: TestsComponentProps) => {
   const [runningTest, setRunningTest] = useState<string>();
   const runningAllTests = useRef(false);
   const runningTestRef = useRef(runningTest);
@@ -46,6 +47,7 @@ const TestsComponent = ({ tests }: TestsComponentProps) => {
       {tests.map((test) => (
         <TestComponent
           key={test.testName}
+          testGroupName={name}
           onRunTest={setRunningTest}
           onFinishTest={handleFinishTest}
           runningTestName={runningTest}
