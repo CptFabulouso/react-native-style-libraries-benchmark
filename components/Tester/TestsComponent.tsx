@@ -4,7 +4,7 @@ import { View as RNView, Button, Text as RNText, View } from "react-native";
 import { staticStyles } from "./RenderTests.styles";
 import TestComponent, { TestComponentProps } from "./TestComponent";
 import TimedRender from "./TimedRender";
-import { ORIGINAL_COUNT } from "@/utils";
+import { countHolder } from "@/utils";
 
 export type TestsComponentProps = {
   name: string;
@@ -16,6 +16,7 @@ export type TestsComponentProps = {
 };
 
 const TestsComponent = ({ OriginalTest, tests, name }: TestsComponentProps) => {
+  const countValue = countHolder.useCount();
   const [runningTest, setRunningTest] = useState<string>();
   const runningAllTests = useRef(false);
   const runningTestRef = useRef(runningTest);
@@ -66,6 +67,7 @@ const TestsComponent = ({ OriginalTest, tests, name }: TestsComponentProps) => {
           onFinishTest={handleFinishTest}
           runningTestName={runningTest}
           Component={test.componentRender}
+          numberOfElements={countValue}
           {...test}
         />
       ))}
@@ -76,7 +78,7 @@ const TestsComponent = ({ OriginalTest, tests, name }: TestsComponentProps) => {
         <>
           <TimedRender key={name} />
           <View style={staticStyles.originalContainer}>
-            {new Array(ORIGINAL_COUNT).fill(0).map((_, i) => (
+            {new Array(countValue).fill(0).map((_, i) => (
               <OriginalTest key={i} />
             ))}
           </View>

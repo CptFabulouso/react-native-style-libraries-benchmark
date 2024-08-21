@@ -1,6 +1,8 @@
 import { useFonts } from "expo-font";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import { countHolder } from "@/utils";
 
 type StyleLib =
   | "React Native"
@@ -28,6 +30,8 @@ const styleLibs: StyleLib[] = [
 ];
 
 export default function App() {
+  const countValue = countHolder.useCount();
+
   const onStyleTypePress = (curry: StyleLib) => () => {
     router.navigate(`/${curry}`);
   };
@@ -43,10 +47,22 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text>Number of elements to render is</Text>
+      <TextInput
+        value={"" + countValue}
+        onChangeText={countHolder.setCount}
+        style={styles.input}
+      />
       <Text style={styles.text}>Tap a style library to start rendering</Text>
       {styleLibs.map((lib) => {
         return <Button key={lib} title={lib} onPress={onStyleTypePress(lib)} />;
       })}
+      <Button
+        title="Original renderer"
+        onPress={() => {
+          router.navigate(`/OriginalRenderer`);
+        }}
+      />
     </View>
   );
 }
@@ -64,5 +80,11 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: "bold",
     fontSize: 16,
+  },
+  input: {
+    marginTop: 5,
+    fontSize: 20,
+    padding: 5,
+    borderWidth: 1,
   },
 });

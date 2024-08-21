@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { Button, View as RNView } from "react-native";
 
 import { staticStyles } from "./RenderTests.styles";
 import { useTest } from "@/hooks";
 import { COUNT } from "@/utils";
-
-const arr = new Array(COUNT).fill(0);
 
 export type TestComponentProps = {
   index: number;
@@ -19,6 +17,7 @@ type TestProps = {
   runningTestName: string | undefined;
   onRunTest: (test: string) => void;
   onFinishTest: (t: undefined) => void;
+  numberOfElements: number;
   Component: React.FC<TestComponentProps>;
 };
 const TestComponent = ({
@@ -29,6 +28,8 @@ const TestComponent = ({
   runningTestName,
   Component,
 }: TestProps) => {
+  const arr = useMemo(() => new Array(COUNT).fill(0), []);
+
   const handleTestComplete = useCallback(
     ({ average }: { average: number }) => {
       onFinishTest(undefined);
