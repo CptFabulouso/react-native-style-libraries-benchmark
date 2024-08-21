@@ -37,7 +37,7 @@ const TestComponent = ({
         `GROUP: ${testGroupName} TEST: ${testName} AVERAGE: ${average}`,
       );
     },
-    [onFinishTest, testName],
+    [onFinishTest, testGroupName, testName],
   );
 
   const { iteration, runTest, testRunning, average } = useTest({
